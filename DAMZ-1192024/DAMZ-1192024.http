@@ -1,0 +1,6 @@
+@DAMZ_1192024_HostAddress = http://localhost:5224
+
+GET {{DAMZ_1192024_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

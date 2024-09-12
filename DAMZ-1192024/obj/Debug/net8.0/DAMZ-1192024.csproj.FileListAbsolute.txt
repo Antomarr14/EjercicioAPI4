@@ -31,3 +31,12 @@ C:\Users\Diego Marroquin\Desktop\EjercicioAPI4\DAMZ-1192024\obj\Debug\net8.0\ref
 C:\Users\Diego Marroquin\Desktop\EjercicioAPI4\DAMZ-1192024\obj\Debug\net8.0\DAMZ-1192024.pdb
 C:\Users\Diego Marroquin\Desktop\EjercicioAPI4\DAMZ-1192024\obj\Debug\net8.0\DAMZ-1192024.genruntimeconfig.cache
 C:\Users\Diego Marroquin\Desktop\EjercicioAPI4\DAMZ-1192024\obj\Debug\net8.0\ref\DAMZ-1192024.dll
+C:\Users\Diego Marroquin\Desktop\EjercicioAPI4\DAMZ-1192024\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\Diego Marroquin\Desktop\EjercicioAPI4\DAMZ-1192024\bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\Diego Marroquin\Desktop\EjercicioAPI4\DAMZ-1192024\bin\Debug\net8.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\Diego Marroquin\Desktop\EjercicioAPI4\DAMZ-1192024\bin\Debug\net8.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\Diego Marroquin\Desktop\EjercicioAPI4\DAMZ-1192024\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\Diego Marroquin\Desktop\EjercicioAPI4\DAMZ-1192024\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\Diego Marroquin\Desktop\EjercicioAPI4\DAMZ-1192024\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\Diego Marroquin\Desktop\EjercicioAPI4\DAMZ-1192024\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\Diego Marroquin\Desktop\EjercicioAPI4\DAMZ-1192024\obj\Debug\net8.0\DAMZ-1192024.sourcelink.json

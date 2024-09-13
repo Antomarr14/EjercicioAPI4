@@ -1,13 +1,13 @@
 using DAMZ_1192024.Auth;
 using DAMZ_1192024.EndPoints;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(b => {
     b.SwaggerDoc("v1", new OpenApiInfo { Title = "JWT API", Version = "V1" });
@@ -30,39 +30,45 @@ builder.Services.AddSwaggerGen(b => {
     b.AddSecurityRequirement(new OpenApiSecurityRequirement { { jwtSecurityScheme, Array.Empty<string>() } });
 });
 
-// Configuración de la política de autorización
 builder.Services.AddAuthorization(options => {
     options.AddPolicy("LoggedInPolicy", policy => {
         policy.RequireAuthenticatedUser();
     });
 });
 
-// Clave secreta para JWT
-var key = "Key.JWTAPIMinimal2024.API";
+var key = "Key.JWTAPIMinimal2024.API.Securekey2024";
 
-// Configuración de autenticación
 builder.Services.AddAuthentication(options => {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 })
 .AddJwtBearer(options => {
-    options.RequireHttpsMetadata = false; // Cambiado de RequireHttpsMetadat a RequireHttpsMetadata
+    options.RequireHttpsMetadata = false;
     options.SaveToken = true;
 
     options.TokenValidationParameters = new TokenValidationParameters {
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(key)),
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key)),
         ValidateAudience = false,
         ValidateIssuerSigningKey = true,
         ValidateIssuer = false,
     };
+
+    options.Events = new JwtBearerEvents
+    {
+        OnChallenge = context =>
+        {
+            context.Response.StatusCode = 401;
+            context.Response.ContentType = "application/json";
+            var result = System.Text.Json.JsonSerializer.Serialize(new { message = "Debes iniciar sesión" });
+            return context.Response.WriteAsync(result);
+        }
+    };
 });
 
-// Registro del servicio de autenticación JWT
 builder.Services.AddSingleton<IJwtAuthenticationService>(new JwtAuthenticationService(key));
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment()) {
     app.UseSwagger();
     app.UseSwaggerUI();
@@ -72,9 +78,18 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 
-// Agregar endpoints
+
+app.MapPost("/protected-endpoint", [Authorize(Policy = "LoggedInPolicy")] (string data) => {
+    return Results.Ok("Acceso concedido");
+});
+
+app.MapGet("/another-protected-endpoint", [Authorize(Policy = "LoggedInPolicy")] () => {
+    return Results.Ok("Acceso concedido");
+});
+
+
 app.AddAccountEndPoint();
-app.AddProtectedEndPoint();
 app.AddBodegaEndPoint();
+app.AddCategoriaProductoEndPoint();
 
 app.Run();

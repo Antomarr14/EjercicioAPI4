@@ -23,7 +23,7 @@ namespace DAMZ_1192024.EndPoints
                 data.Add(new { Name = name, LastName = lastName });
                 return Results.Ok();
             })
-            .RequireAuthorization(); // Requiere autorización para acceder al endpoint
+            .RequireAuthorization();
         }
     }
 }

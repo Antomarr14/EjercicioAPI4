@@ -10,10 +10,10 @@ namespace DAMZ_1192024.EndPoints
         {
             app.MapPost("/account/login", (string login, string password, IJwtAuthenticationService authService) =>
             {
-                // Verificar las credenciales del usuario
+                
                 if (login == "admin" && password == "admin123")
                 {
-                    // Generar el token usando el nombre de usuario correcto
+                    
                     var token = authService.Authenticate(login);
                     return Results.Ok(new { Token = token });
                 }
